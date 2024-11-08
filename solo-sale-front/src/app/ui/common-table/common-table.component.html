@@ -1,0 +1,44 @@
+<table class="min-w-full bg-white border border-gray-200">
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns" class="py-2 px-4 border-b text-left">
+        {{ column.name }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td *ngFor="let column of columns" class="py-2 px-4 border-b">
+        {{ item[column.key] }}
+      </td>
+      <td *ngIf="editAction" class="py-2 px-4 border-b">
+        <button
+      (click)="openEditDialog(item)" 
+            class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          >Edit
+          </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Pagination -->
+<div class="mt-4 flex justify-between items-center">
+  <button 
+    [disabled]="page == 0"
+    (click)="onPageChange(page - 1)" 
+    class="bg-gray-700 text-white p-2 rounded hover:bg-gray-600"
+  >
+    Previous
+  </button>
+
+  <span>Page {{ page + 1 }} of {{ totalItems}}</span>
+
+  <button 
+    [disabled]="page == totalItems-1"
+    (click)="onPageChange(page + 1)" 
+    class="bg-gray-700 text-white p-2 rounded hover:bg-gray-600"
+  >
+    Next
+  </button>
+</div>

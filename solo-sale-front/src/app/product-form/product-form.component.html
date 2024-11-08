@@ -1,0 +1,56 @@
+<div class="container mx-auto p-4">
+  <h2 class="text-lg font-bold" *ngIf="data?.productName">Edit Product</h2>
+<h2 class="text-lg font-bold" *ngIf="!data?.productName">Add Product</h2>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div class="mb-4">
+    <label>Product Name</label>
+    <input type="text" formControlName="productName" class="w-full p-2 border border-gray-300 rounded" />
+    <div *ngIf="productForm.get('productName').invalid && productForm.get('productName').touched" class="text-red-500">
+      Product name is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label>Brand</label>
+    <select formControlName="brandId" class="w-full p-2 border border-gray-300 rounded">
+      <option value="">Select Brand</option>
+      <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</option>
+    </select>
+    <div *ngIf="productForm.get('brandId').invalid && productForm.get('brandId').touched" class="text-red-500">
+      Brand is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label>Category</label>
+    <select formControlName="categoryId" class="w-full p-2 border border-gray-300 rounded">
+      <option value="">Select Category</option>
+      <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+    </select>
+    <div *ngIf="productForm.get('categoryId').invalid && productForm.get('categoryId').touched" class="text-red-500">
+      Category is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label>MRP</label>
+    <input type="number" formControlName="mrp" class="w-full p-2 border border-gray-300 rounded" />
+    <div *ngIf="productForm.get('mrp').invalid && productForm.get('mrp').touched" class="text-red-500">
+      MRP must be at least 1.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label>Selling Price</label>
+    <input type="number" formControlName="sellingPrice" class="w-full p-2 border border-gray-300 rounded" />
+    <div *ngIf="productForm.get('sellingPrice').invalid && productForm.get('sellingPrice').touched" class="text-red-500">
+      Selling Price must be at least 1.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="productForm.invalid" class="bg-green-500 text-white p-2 rounded">Save</button>
+  <button type="button" (click)="onCancel()" class="bg-gray-500 text-white p-2 rounded ml-2">Cancel</button>
+</form>
+</div>
+

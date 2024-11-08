@@ -1,0 +1,35 @@
+<div class="mb-4 grid grid-cols-1 sm:grid-cols-4 gap-4">
+  <div *ngFor="let field of searchFields">
+    <!-- For text type -->
+    <div *ngIf="field.type === 'text'">
+      <input 
+        [(ngModel)]="field.value"
+        (input)="onSearchChange()"
+        [placeholder]="field.placeholder"
+        class="p-2 border border-gray-300 rounded w-full"
+      />
+    </div>
+
+    <!-- For dropdown type -->
+    <div *ngIf="field.type === 'dropdown'">
+      <select 
+        [(ngModel)]="field.value"
+        (change)="onFilterChange()"
+        class="p-2 border border-gray-300 rounded w-full"
+      >
+        <option value="">{{ field.placeholder }}</option>
+        <option *ngFor="let option of field.options" [value]="option.id">{{ option.name }}</option>
+      </select>
+    </div>
+
+    <!-- For Date type -->
+    <div *ngIf="field.type === 'date'">
+      <input 
+        [(ngModel)]="field.value"
+        (change)="onFilterChange()"
+        type="date"
+        class="p-2 border border-gray-300 rounded w-full"
+      />
+    </div>
+  </div>
+</div>

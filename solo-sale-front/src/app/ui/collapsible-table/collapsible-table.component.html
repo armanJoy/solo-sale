@@ -1,0 +1,68 @@
+<table class="min-w-full bg-white border border-gray-200">
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns" class="py-2 px-4 border-b text-left">
+        {{ column.name }}
+      </th>
+      <th class="py-2 px-4 border-b text-left">
+        Action
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <div *ngFor="let item of data; let i = index">
+      <tr class="w-full flex justify-between">
+        <td *ngFor="let column of columns" class="py-2 px-4 border-b">
+          {{ item[column.key] }}
+        </td>
+        <td class="py-2 px-4 border-b">
+          <button 
+            (click)="toggleRow(i)" 
+            class="bg-gray-700 text-white p-2 rounded hover:bg-gray-600"
+          >
+            {{ item.expanded ? 'Hide' : 'Show' }} Details
+          </button>
+        </td>
+      </tr>
+      <table *ngIf="item.expanded">
+        <thead>
+          <tr>
+            <th *ngFor="let childColumn of childColumns" class="py-2 px-4 border-b text-left">
+              {{ childColumn.name }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let childItem of item[childKey]">
+            <td *ngFor="let childColumn of childColumns" class="py-2 px-4 border-b">
+              {{ childItem[childColumn.key] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      <!-- Child rows will be displayed here -->
+      
+  </tbody>
+</table>
+
+<!-- Pagination -->
+<div class="mt-4 flex justify-between items-center">
+  <button 
+    [disabled]="page == 0"
+    (click)="onPageChange(page - 1)" 
+    class="bg-gray-700 text-white p-2 rounded hover:bg-gray-600"
+  >
+    Previous
+  </button>
+
+  <span>Page {{ page + 1 }} of {{ totalItems}}</span>
+
+  <button 
+    [disabled]="page == totalItems-1"
+    (click)="onPageChange(page + 1)" 
+    class="bg-gray-700 text-white p-2 rounded hover:bg-gray-600"
+  >
+    Next
+  </button>
+</div>

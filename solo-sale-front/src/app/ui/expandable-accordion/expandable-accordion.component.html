@@ -1,0 +1,54 @@
+<div *ngFor="let item of data" class="border rounded-md mb-4">
+  <!-- Accordion Header -->
+  <div 
+    (click)="toggleItem(item)"
+    class="bg-gray-200 p-4 cursor-pointer flex justify-between items-center"
+  >
+  <div *ngFor="let column of columns">
+    <span class="font-normal flex w-60 ">{{column.name}} : {{item[column.key]}}</span>
+  </div>
+   
+    <span class="text-gray-500 font-medium">{{ item.expanded ? '-' : '+' }}</span>
+  </div>
+
+  <!-- Accordion Content (Child Table) -->
+  <div *ngIf="item.expanded" class="p-4">
+    <table class="min-w-full bg-white border border-gray-200">
+      <thead>
+        <tr>
+          <th *ngFor="let column of childColumns" class="py-2 px-4 border-b text-left">
+            {{ column.name }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let child of item[childKey]">
+          <td *ngFor="let column of childColumns" class="py-2 px-4 border-b">
+            {{ child[column.key] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="mt-4 flex justify-between items-center">
+  <button 
+    [disabled]="page == 0"
+    (click)="onPageChange(page - 1)" 
+    class="bg-gray-700 text-white p-2 rounded hover:bg-gray-600"
+  >
+    Previous
+  </button>
+
+  <span>Page {{ page + 1 }} of {{ totalItems}}</span>
+
+  <button 
+    [disabled]="page == totalItems-1"
+    (click)="onPageChange(page + 1)" 
+    class="bg-gray-700 text-white p-2 rounded hover:bg-gray-600"
+  >
+    Next
+  </button>
+</div>

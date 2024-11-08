@@ -1,0 +1,22 @@
+<div class="container mx-auto p-4">
+  <div class="flex justify-between">
+    <div>
+      <h1 class="text-4xl font-semibold mb-6">Sale History</h1>
+    </div>
+    <div>
+      <button
+      (click)="openSalesFormDialog()" 
+            class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          >Entry New Sale
+          </button>
+    </div>
+  </div>
+
+  <app-search-filter 
+    [searchFields]="searchFields"
+    (filterChanged)="onFilterChange($event)">
+  </app-search-filter>
+
+  <app-expandable-accordion [data]="data" [columns]="columns" [childColumns]="childColumns" [childKey]="childKey" [page]="page"
+  [totalItems]="totalItems"
+  (pageChange)="onPageChange($event)"></app-expandable-accordion>

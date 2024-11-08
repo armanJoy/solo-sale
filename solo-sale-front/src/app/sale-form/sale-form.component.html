@@ -1,0 +1,66 @@
+<div class="container mx-auto p-4">
+
+  <h2 class="text-lg font-bold">Sale Form</h2>
+
+  <form [formGroup]="saleForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label>Customer Name</label>
+      <input type="text" formControlName="customerName" class="w-full p-2 border border-gray-300 rounded" />
+      <div *ngIf="saleForm.get('customerName').invalid && saleForm.get('customerName').touched" class="text-red-500">
+        Name is required.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label>Customer Phone</label>
+      <input type="text" formControlName="customerPhone" class="w-full p-2 border border-gray-300 rounded" placeholder="01712345678" />
+      <div *ngIf="saleForm.get('customerPhone').invalid && saleForm.get('customerPhone').touched" class="text-red-500">
+        Phone format should be "01712345678".
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label>Customer Address</label>
+      <textarea formControlName="customerAddress" class="w-full p-2 border border-gray-300 rounded"></textarea>
+      <div *ngIf="saleForm.get('customerAddress').invalid && saleForm.get('customerAddress').touched" class="text-red-500">
+        Address is required.
+      </div>
+    </div>
+
+    <div formArrayName="soldProducts" class="mb-4">
+      <label>Sold Products</label>
+      <div *ngFor="let product of soldProducts.controls; let i = index" [formGroupName]="i" class="mt-2">
+        <select formControlName="productId" class="p-2 border border-gray-300 rounded">
+          <option *ngFor="let product of products" [value]="product.id">{{ product.productName }}</option>
+        </select>
+        <input type="number" formControlName="quantity" min="1" placeholder="Quantity" class="p-2 border border-gray-300 rounded" />
+        <button (click)="removeProduct(i)" type="button" class="text-red-500 ml-2">Remove</button>
+        <div *ngIf="product.get('quantity').invalid && product.get('quantity').touched" class="text-red-500">
+          Quantity must be at least 1.
+        </div>
+      </div>
+      <button type="button" (click)="addProduct()" class="bg-blue-500 text-white p-2 rounded mt-2">Add Product</button>
+    </div>
+
+    <div class="mb-4">
+      <label>Discount Percentage</label>
+      <input type="number" formControlName="discountPercentage" class="w-full p-2 border border-gray-300 rounded" />
+      <div *ngIf="saleForm.get('discountPercentage').invalid && saleForm.get('discountPercentage').touched" class="text-red-500">
+        Discount must be between 0 and 100.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label>Delivery Charge</label>
+      <input type="number" formControlName="deliveryCharge" class="w-full p-2 border border-gray-300 rounded" />
+    </div>
+
+    <div class="mb-4">
+      <label>Final Amount</label>
+      <input type="text" [value]="finalAmount" readonly class="w-full p-2 border border-gray-300 rounded bg-gray-100" />
+    </div>
+
+    <button type="submit" [disabled]="saleForm.invalid" class="bg-green-500 text-white p-2 rounded">Submit</button>
+    <button type="button" (click)="onCancel()" class="bg-gray-500 text-white p-2 rounded ml-2">Cancel</button>
+  </form>
+</div>

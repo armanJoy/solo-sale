@@ -1,0 +1,48 @@
+server:
+  port: 7070
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    #    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    host:
+    username:
+    password:
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/inv_db_test?currentSchema=public
+    username: postgres
+    password: j363
+  mvc:
+    log-resolved-exception: true
+
+
+jwt:
+  secret: InventoryManagementSystemSecRetKeyValueForJwtToken
+  validation-time: 6000000
+  refresh-time: 86400000
+
+
+
+springdoc:
+  swagger-ui:
+    tagsSorter: alpha
+    operationsSorter: alpha
+    docExpansion: none
+    displayRequestDuration: true
+
+spring.data.web.pageable.max-page-size: 100
+spring.data.rest.max-page-size: 100
