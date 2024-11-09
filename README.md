@@ -9,6 +9,7 @@
 1. **Initialize Database with Sample Data**:
    - Create a database `inv_db_test` from your postgres cli
    - Run the `data.sql` file in the `src/main/resources` directory to populate initial data in your database.
+   - Update the db password in `src/main/resources/application.yml`
 
 3. **Start the Backend Server**:
    - Navigate to the backend project directory.
