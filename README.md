@@ -19,6 +19,7 @@
      ```
 
    - The server will start on `http://localhost:7070` by default.
+   - You can find API swagger documentation here `http://localhost:7070/swagger-ui/index.html#`
 
 ### Step 2: Frontend (Angular)
 
@@ -45,7 +46,7 @@
 4. **Login**:
 		- Username: admin
 		- Password: 123456
-Alternatively you can create an User from swagger `http://localhost:7070/swagger-ui.html`
+Alternatively you can create an User from swagger `http://localhost:7070/swagger-ui/index.html#`
 
 ## Feature Guide
 
